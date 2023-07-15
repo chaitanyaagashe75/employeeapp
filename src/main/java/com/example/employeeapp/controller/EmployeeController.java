@@ -51,9 +51,6 @@ public class EmployeeController {
         return employeeService.hardDeleteEmpoyee(id);
     }
 
-    @DeleteMapping("/deleteAll")
-    public String hardDeleteEmployee() throws EmployeeException {
-        return employeeService.deleteAll();
-    }
+    
 
 }
