@@ -22,4 +22,6 @@ public interface EmployeeService {
     public String hardDeleteEmpoyee(String id);
 
     public String deleteAll() throws EmployeeException;
+
+    public List<Employee> getAllEmployeeFilteredByAge();
 }

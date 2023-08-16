@@ -15,6 +15,8 @@ public class Employee {
     @Id
     private String id;
 
+    private int age;
+
     private String name;
 
     private String city;

@@ -1,5 +1,6 @@
 package com.example.employeeapp.service.impl;
 
+import com.example.employeeapp.comparator.EmployeeComparator;
 import com.example.employeeapp.exception.EmployeeException;
 import com.example.employeeapp.model.Employee;
 import com.example.employeeapp.repository.EmployeeRepository;
@@ -8,10 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -31,6 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Iterator<Employee> itrEmployees = employees.iterator();
         while (itrEmployees.hasNext()) {
             Employee employee = itrEmployees.next();
+            employee.setIsActive(true);
             savedEmployees.add(employeeRepository.save(employee));
         }
         return savedEmployees;
@@ -103,7 +103,15 @@ public class EmployeeServiceImpl implements EmployeeService {
             return "all record deleted";
         } catch (Exception e) {
             e.printStackTrace();
-            throw new EmployeeException("ERROR", ""+e.getMessage());
+            throw new EmployeeException("ERROR"+e.getMessage());
         }
+    }
+
+    @Override
+    public List<Employee> getAllEmployeeFilteredByAge() {
+        List<Employee> allEmployees = employeeRepository.findAll();
+//        List<Employee> filteredEmployees = allEmployees.stream().filter(e -> e.getAge() > 30).collect(Collectors.toList());
+        Collections.sort(allEmployees, new EmployeeComparator());
+        return allEmployees;
     }
 }

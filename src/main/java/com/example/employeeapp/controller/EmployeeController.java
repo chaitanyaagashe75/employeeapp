@@ -51,6 +51,10 @@ public class EmployeeController {
         return employeeService.hardDeleteEmpoyee(id);
     }
 
-    
+    @GetMapping("/getAll/ageFilter")
+    public List<Employee> getAllEmployeeFilteredByAge() {
+        return employeeService.getAllEmployeeFilteredByAge();
+    }
+
 
 }

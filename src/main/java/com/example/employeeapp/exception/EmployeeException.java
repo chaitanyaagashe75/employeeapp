@@ -5,6 +5,10 @@ public class EmployeeException extends Exception {
     String code;
     String message;
 
-//    hello, how are you?
+    public EmployeeException(String message){
+          System.out.println(message+"Error");
+    }
+
+
 
 }
